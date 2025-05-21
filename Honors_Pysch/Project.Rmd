@@ -1,0 +1,144 @@
+---
+title: "Honors Project"
+output: html_notebook
+---
+
+### Question of interest
+
+Which advertising medium (TV, radio, newspaper) has the strongest correlation with sales?
+
+Independent Variables:\
+TV, Radio, Newspaper
+
+Dependent Variables:
+
+Sales
+
+```{r}
+#Uploading and viewing data from data sets
+ads_data <- read.csv("Advertising.csv")
+head(ads_data)
+```
+
+```{r}
+plot(ads_data)
+```
+
+### Correlation Test
+
+Below, we are calculating Pearson correlation coefficient between each predictor and the sales variable
+
+The cor.test() function gives us t, df, andnp-value
+
+Our Null hypothesis is that there is no correlation between advertising spending and sales
+
+Alt Hypothesis: There is a significant correlation between advertising spending and sales
+
+```{r}
+# Correlation between TV budget and sales
+tv_cor <- cor.test(ads_data$TV, ads_data$sales)
+tv_cor
+
+# Correlation between radio budget and sales
+radio_cor <- cor.test(ads_data$radio, ads_data$sales)
+radio_cor
+
+# Correlation between newspaper budget and sales
+newspaper_cor <- cor.test(ads_data$newspaper, ads_data$sales)
+newspaper_cor
+
+```
+
+## Effect Size:
+
+## 
+
+
+
+
+
+
+
+
+
+**Effect Size**:
+
+The correlation coefficient itself can be interpreted as an effect size, where:
+
+	•	0.1 to 0.3 indicates a small effect,
+
+	•	0.3 to 0.5 indicates a medium effect,
+
+	•	0.5 or greater indicates a large effect.
+
+\
+\
+Trends
+
+1.  **TV vs Sales**: This plot shows a strong positive relationship between TV advertising and sales, as indicated by the upward trend.
+
+    2.  **Radio vs Sales**: This plot shows a moderate positive relationship between radio advertising and sales, with a bit more scatter than TV.
+
+    3.  **Newspaper vs Sales**: This plot indicates a weaker relationship between newspaper advertising and sales, with the points more spread out and less of a clear trend.
+
+```{r}
+# Load the dataset
+ads_data <- read.csv("Advertising.csv")
+
+# Set up the plotting area with 3 plots side by side
+par(mfrow = c(1, 3)) # Creates a 1x3 grid for the plots
+
+# TV vs Sales
+plot(ads_data$TV, ads_data$sales, 
+     main = "TV vs Sales", 
+     xlab = "TV Budget (Thousands)", 
+     ylab = "Sales (Thousands)", 
+     pch = 19, col = "blue")
+
+# Radio vs Sales
+plot(ads_data$radio, ads_data$sales, 
+     main = "Radio vs Sales", 
+     xlab = "Radio Budget (Thousands)", 
+     ylab = "Sales (Thousands)", 
+     pch = 19, col = "red")
+
+# Newspaper vs Sales
+plot(ads_data$newspaper, ads_data$sales, 
+     main = "Newspaper vs Sales", 
+     xlab = "Newspaper Budget (Thousands)", 
+     ylab = "Sales (Thousands)", 
+     pch = 19, col = "green")
+
+# Reset the plotting area to default
+par(mfrow = c(1, 1))
+```
+
+```         
+1.  TV Advertising and Sales:
+```
+
+The correlation coefficient is 0.782 with a 95% confidence interval of (0.722, 0.831). The p-value is extremely small (less than 2.2e-16), indicating that the correlation is highly statistically significant.
+
+```         
+•   Interpretation: This shows a strong positive correlation between TV advertising budget and sales, meaning that as the TV advertising budget increases, sales are likely to increase significantly.
+
+2.  Radio Advertising and Sales:
+```
+
+The correlation coefficient is 0.576 with a 95% confidence interval of (0.475, 0.662). The p-value is also less than 2.2e-16, indicating a statistically significant correlation.
+
+```         
+•   Interpretation: This indicates a moderate positive correlation between radio advertising and sales. Radio advertising has a positive effect on sales, though it is not as strong as TV advertising.
+
+3.  Newspaper Advertising and Sales:
+```
+
+The correlation coefficient is 0.228 with a 95% confidence interval of (0.092, 0.356). The p-value is 0.0011, which suggests that the correlation is statistically significant, but weaker than TV and radio.
+
+```         
+•   Interpretation: This shows a weak positive correlation between newspaper advertising and sales, meaning that newspaper advertising has a minimal impact on sales compared to TV and radio.
+```
+
+## Overall:
+
+The analysis shows that TV advertising has the most substantial impact on sales, followed by radio advertising with a moderate impact, and newspaper advertising with a relatively weak influence.
